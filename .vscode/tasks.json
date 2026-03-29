@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "mkdir build",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "if not exist \"${workspaceFolder}\\build\" mkdir \"${workspaceFolder}\\build\""
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe 生成活动文件 (build/)",
+      "command": "C:\\mingw\\mingw64\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "-std=c++17",
+        "${file}",
+        "-o",
+        "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "mkdir build",
+      "detail": "编译当前活动文件到 build/ 目录。"
+    },
+    {
+      "label": "Run: 活动文件 (build/)",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "\"${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe\""
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": "C/C++: g++.exe 生成活动文件 (build/)",
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean: build/ + root artifacts",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "if exist \"${workspaceFolder}\\build\" rmdir /s /q \"${workspaceFolder}\\build\" & del /q \"${workspaceFolder}\\*.exe\" \"${workspaceFolder}\\*.o\" 2>nul"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
